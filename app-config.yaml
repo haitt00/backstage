@@ -280,6 +280,10 @@ catalog:
       target: ../../packages/backend/src/plugins/scaffolder/templates/jhipster/templateJHipster.yaml
       rules:
         - allow: [ Template ]
+    - type: file
+      target: ../../packages/backend/src/plugins/scaffolder/templates/postgresql/templatePostgresql.yaml
+      rules:
+        - allow: [ Template ]
 scaffolder:
   # Use to customize default commit author info used when new components are created
   # defaultAuthor:
