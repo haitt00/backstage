@@ -1,0 +1,59 @@
+{% set messageBroker, searchEngine, websocket = false %}
+{% for option in values.serverSideOptions.split(",") %}
+  {% if 'messageBroker'in option %}
+    {% set messageBroker = '"kafka"' %}
+  {% endif %}
+  {% if 'searchEngine'in option %}
+    {% set searchEngine = '"elasticsearch"' %}
+  {% endif %}
+  {% if 'websocket'in option %}
+    {% set websocket = '"spring-websocket"' %}
+  {% endif %}
+{% endfor %}
+{
+  "generator-jhipster": {
+    "applicationType": "${{ values.applicationType }}",
+    "authenticationType": "${{ values.authenticationType }}",
+    "baseName": "${{ values.baseName }}",
+    "blueprints": [],
+    "buildTool": "${{ values.buildTool }}",
+    "cacheProvider": "${{ values.cacheProvider }}",
+    "clientFramework": "${{ values.clientFramework }}",
+    "clientPackageManager": "npm",
+    "clientTheme": "${{ values.clientTheme }}",
+    "clientThemeVariant": "",
+    "databaseType": "${{ values.databaseType }}",
+    "devDatabaseType": "${{ values.devDatabaseType }}",
+    "devServerPort": 4200,
+    "dtoSuffix": "DTO",
+    "enableGradleEnterprise": false,
+    "enableHibernateCache": ${{ values.enableHibernateCache }},
+    "enableSwaggerCodegen": false,
+    "enableTranslation": ${{ values.enableTranslation }},
+    "entitySuffix": "",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "7.9.3",
+    "languages": ${{ values.languages }},
+    "messageBroker": ${{ messageBroker }},
+    "microfrontend": false,
+    "microfrontends": [],
+    "nativeLanguage": "${{ values.nativeLanguage }}",
+    "otherModules": [],
+    "packageName": "${{ values.packageName }}",
+    "pages": [],
+    "prodDatabaseType": "${{ values.prodDatabaseType }}",
+    "reactive": ${{ values.reactive }},
+    "searchEngine": ${{ searchEngine }},
+    "serverPort": "8080",
+    "serverSideOptions": ${{ values.serverSideOptions }},
+    "serviceDiscoveryType": "${{ values.serviceDiscoveryType }}",
+    "skipCheckLengthOfIdentifier": false,
+    "skipClient": ${{ values.skipClient }},
+    "skipFakeData": false,
+    "skipUserManagement": false,
+    "skipGit": true,
+    "testFrameworks": ${{ values.testFrameworks }},
+    "websocket": ${{ websocket }},
+    "withAdminUi": ${{ values.withAdminUi }}
+}
+}

@@ -1,0 +1,322 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
+kind: Template
+metadata:
+  name: a-example-jhipster-template
+  title: JHipster Template
+  description: Create a new JHipster project with Angular frontend and Spring Boot backend
+  tags:
+    - recommended
+    - jhipster
+    - spring-boot
+    - angular
+spec:
+  owner: user:guest
+  type: service
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: Project 
+      required: [applicationType,baseName]
+      properties:
+        applicationType:
+          title: Type
+          type: string
+          description: Which type of application would you like to create?
+          enum:
+            - monolith
+            - microservice
+          enumNames:
+            - 'Monolithic application (recommended for simple projects)'
+            - 'Microservice application'
+          ui:autofocus: true
+          default: monolith
+        baseName:
+          title: Application Name
+          type: string
+          description: What is the base name of your application
+          pattern: '^([a-zA-Z0-9_]*)$'
+      dependencies:
+        applicationType:
+          oneOf:
+            - properties:
+                applicationType:
+                  enum: [monolith]
+                skipClient:
+                  title: Skip Client?
+                  type: boolean
+                  default: false
+            - properties:
+                applicationType:
+                  enum: [microservice]
+    - title: Server
+      required: [reactive,packageName,authenticationType,databaseType,prodDatabaseType,devDatabaseType,cacheProvider,enableHibernateCache,buildTool,serviceDiscoveryType]
+      properties:
+        reactive:
+          title: Do you want to make it reactive with Spring WebFlux?
+          type: boolean
+          enum: [true, false]
+          ui:autofocus: true
+          default: false
+          ui:enumDisabled: [true]
+          ui:disabled: true
+        packageName:
+          title: Java Package Name
+          type: string
+          description: What is your default Java package name?
+        authenticationType:
+          title: Authentication Type
+          type: string
+          description: Which type of authentication would you like to use?
+          enum:
+            - jwt
+            - oauth2
+          enumNames:
+            - 'JWT authentication (stateless, with a token)'
+            - 'OAuth 2.0 / OIDC Authentication (stateful, works with Keycloak and Okta)'
+          default: jwt
+        databaseType:
+          title: Database Type
+          type: string
+          description: Which type of authentication would you like to use?
+          enum:
+            - sql
+          enumNames:
+            - 'SQL (H2, PostgreSQL, MySQL, MariaDB, Oracle, MSSQL)'
+          default: sql
+        prodDatabaseType:
+          title: Production Database Type
+          type: string
+          description: Which type of *production* database would you like to use?
+          enum:
+            - postgresql
+            - mariadb
+          enumNames:
+            - 'PostgreSQL'
+            - 'MariaDB'
+          default: postgresql
+        devDatabaseType:
+          title: Dev Database Type
+          type: string
+          description: Which type of *development* database would you like to use?
+          enum:
+            - postgresql
+            - mariadb
+            - h2Disk
+          enumNames:
+            - 'PostgreSQL'
+            - 'MariaDB'
+            - 'H2 with disk-based persistence'
+          default: postgresql
+        cacheProvider:
+          title: Cache Provider
+          type: string
+          description: Which cache do you want to use? (Spring cache abstraction)
+          enum:
+            - ehcache
+            - caffeine
+            - hazelcast
+            - infinispan
+            - memcached
+            - redis
+            - no
+          enumNames:
+            - 'Ehcache (local cache, for a single node)'
+            - 'Caffeine (local cache, for a single node)'
+            - 'Hazelcast (distributed cache, for multiple nodes, supports rate-limiting for gateway applications)'
+            - 'Infinispan (hybrid cache, for multiple nodes)'
+            - 'Memcached (distributed cache) - Warning, when using an SQL database, this will disable the Hibernate 2nd level cache!'
+            - 'Redis (distributed cache)'
+            - 'No cache - Warning, when using an SQL database, this will disable the Hibernate 2nd level cache!'
+          default: ehcache
+        enableHibernateCache:
+          title: Do you want to use Hibernate 2nd level cache?
+          type: boolean
+          default: true
+        buildTool:
+          title: Build Tool
+          type: string
+          description: Would you like to use Maven or Gradle for building the backend?
+          enum:
+            - maven
+          enumNames:
+            - 'Maven'
+          default: maven
+        serviceDiscoveryType:
+          title: Service Discovery Type
+          type: string
+          description: Do you want to use the JHipster Registry to configure, monitor and scale your application?
+          enum:
+            - no
+          enumNames:
+            - 'No'
+          default: no
+        serverSideOptions:
+          title: Other technologies
+          type: array
+          items:
+            type: string
+            enum: 
+              - searchEngine:elasticsearch
+              - websocket:spring-websocket
+              - messageBroker:kafka
+            enumNames:
+              - 'Elasticsearch as search engine'
+              - 'WebSockets using Spring Websocket'
+              - 'Apache Kafka as asynchronous messages broker'
+          uniqueItems: true
+          ui:widget: checkboxes
+          default: []
+    - title: Client
+      required: [clientFramework,withAdminUi,clientTheme]
+      properties:
+        clientFramework:
+          title: Client Framework
+          type: string
+          ui:autofocus: true
+          description: Which *Framework* would you like to use for the client?
+          enum:
+            - angularX
+          enumNames:
+            - 'Angular'
+          default: angularX
+        withAdminUi:
+          title: Do you want to generate the admin UI?
+          type: boolean
+          default: true
+        clientTheme:
+          title: Client Theme
+          type: string
+          description: Would you like to use a Bootswatch theme (https://bootswatch.com/)?
+          enum:
+            - none
+          enumNames:
+            - 'Default JHipster'
+          default: none
+    - title: Languages
+      required: [enableTranslation,nativeLanguage]
+      properties:
+        enableTranslation:
+          ui:autofocus: true
+          title: Would you like to enable internationalization support?
+          type: boolean
+          default: true
+        nativeLanguage:
+          title: Native Language
+          type: string
+          description: Please choose the native language of the application
+          enum:
+            - en
+            - vi
+          enumNames:
+            - 'English'
+            - 'Tiếng Việt'
+          default: en
+        languages:
+          title: Please choose additional languages to install
+          type: array
+          items:
+            type: string
+            enum:
+              - en
+              - vi
+            enumNames:
+              - 'English'
+              - 'Tiếng Việt'
+          uniqueItems: true
+          ui:widget: checkboxes
+          default: []
+    - title: Testing
+      properties:
+        testFrameworks:
+          ui:autofocus: true
+          title: Besides JUnit and Jest, which testing frameworks would you like to use?
+          type: array
+          items:
+            type: string
+            enum:
+              - cypress
+              - protractor
+              - gatling
+              - cucumber
+            enumNames:
+              - 'Cypress'
+              - '[DEPRECATED] Protractor'
+              - 'Gatling'
+              - 'Cucumber'
+          uniqueItems: true
+          ui:widget: checkboxes
+          default: []
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # These steps are executed in the scaffolder backend, using data that we gathered
+  # via the parameters above.
+  steps:
+    # Each step executes an action, in this case one templates files into the working directory.
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./content
+        values:
+          applicationType: ${{ parameters.applicationType }}
+          baseName: ${{ parameters.baseName }}
+          reactive: ${{ parameters.reactive }}
+          packageName: ${{ parameters.packageName }}
+          authenticationType: ${{ parameters.authenticationType }}
+          databaseType: ${{ parameters.databaseType }}
+          prodDatabaseType: ${{ parameters.prodDatabaseType }}
+          devDatabaseType: ${{ parameters.devDatabaseType }}
+          cacheProvider: ${{ parameters.cacheProvider }}
+          enableHibernateCache: ${{ parameters.enableHibernateCache }}
+          buildTool: ${{ parameters.buildTool }}
+          serviceDiscoveryType: ${{ parameters.serviceDiscoveryType }}
+          serverSideOptions: ${{ parameters.serverSideOptions | dump }}
+          clientFramework: ${{ parameters.clientFramework }}
+          withAdminUi: ${{ parameters.withAdminUi }}
+          clientTheme: ${{ parameters.clientTheme }}
+          enableTranslation: ${{ parameters.enableTranslation }}
+          nativeLanguage: ${{ parameters.nativeLanguage }}
+          languages: ${{ parameters.languages | dump }}
+          testFrameworks: ${{ parameters.testFrameworks | dump }}
+          skipClient: ${{ parameters.skipClient }}
+    - id: jhipster-generate
+      name: Generate using jhipster
+      action: jhipster:monolithic
+
+     # This step publishes the contents of the working directory to GitHub.
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.baseName }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+    # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+     - title: Repository
+       url: ${{ steps.publish.output.remoteUrl }}
+     - title: Open in catalog
+       icon: catalog
+       entityRef: ${{ steps.register.output.entityRef }}
