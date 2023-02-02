@@ -63,6 +63,7 @@
     "@backstage/plugin-techdocs-react": "workspace:^",
     "@backstage/plugin-todo": "workspace:^",
     "@backstage/plugin-user-settings": "workspace:^",
+    "@backstage/plugin-vt-deploy": "^0.0.0",
     "@backstage/theme": "workspace:^",
     "@internal/plugin-catalog-customized": "workspace:^",
     "@material-ui/core": "^4.12.2",

@@ -156,6 +156,7 @@ import {
   ReportIssue,
 } from '@backstage/plugin-techdocs-module-addons-contrib';
 import { EntityCostInsightsContent } from '@backstage/plugin-cost-insights';
+import {VtDeployComponent} from "@backstage/plugin-vt-deploy/src/components/ExampleComponent";
 
 const customEntityFilterKind = ['Component', 'API', 'System'];
 
@@ -410,6 +411,13 @@ const overviewContent = (
   </Grid>
 );
 
+const deployContent = (
+  <VtDeployComponent />
+)
+
+const monitorContent = (
+  <VtDeployComponent />
+)
 const serviceEntityPage = (
   <EntityLayoutWrapper>
     <EntityLayout.Route path="/" title="Overview">
@@ -768,6 +776,21 @@ const domainPage = (
   </EntityLayoutWrapper>
 );
 
+
+const resourcePage = (
+  <EntityLayoutWrapper>
+    <EntityLayout.Route path="/" title="Overview">
+      {overviewContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/deploy" title="Deployment">
+      {deployContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/monitor" title="Monitor">
+      {monitorContent}
+    </EntityLayout.Route>
+  </EntityLayoutWrapper>
+);
+
 export const entityPage = (
   <EntitySwitch>
     <EntitySwitch.Case if={isKind('component')} children={componentPage} />
@@ -776,6 +799,7 @@ export const entityPage = (
     <EntitySwitch.Case if={isKind('user')} children={userPage} />
     <EntitySwitch.Case if={isKind('system')} children={systemPage} />
     <EntitySwitch.Case if={isKind('domain')} children={domainPage} />
+    <EntitySwitch.Case if={isKind('resource')} children={resourcePage} />
 
     <EntitySwitch.Case>{defaultEntityPage}</EntitySwitch.Case>
   </EntitySwitch>
