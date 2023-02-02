@@ -301,8 +301,10 @@ auth:
   providers:
     google:
       development:
-        clientId: ${AUTH_GOOGLE_CLIENT_ID}
-        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
+#        clientId: ${AUTH_GOOGLE_CLIENT_ID}
+#        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
+        clientId: 56888656694-g050lpn1j44q3m0o217vqbrr7o1d5cms.apps.googleusercontent.com
+        clientSecret: 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
     github:
       development:
 #        clientId: ${AUTH_GITHUB_CLIENT_ID}
