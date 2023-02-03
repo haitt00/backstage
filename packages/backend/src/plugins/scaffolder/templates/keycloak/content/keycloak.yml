@@ -1,0 +1,26 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+version: '3.8'
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.1
+    command: ['start-dev --import-realm']
+    volumes:
+      - ./realm-config:/opt/keycloak/data/import
+    environment:
+      - KC_DB=dev-file
+      - KEYCLOAK_ADMIN=${{values.kcAdmin}}
+      - KEYCLOAK_ADMIN_PASSWORD=${{values.kcPassword}}
+      - KC_FEATURES=scripts
+      - KC_HTTP_PORT=${{values.httpPort}}
+      - KC_HTTPS_PORT=${{values.httpsPort}}
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - ${{values.httpPort}}:9080
+      - ${{values.httpsPort}}:9443
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9080/realms/jhipster']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s

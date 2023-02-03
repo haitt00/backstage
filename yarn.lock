@@ -8400,6 +8400,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@backstage/plugin-vt-monitor@^0.0.0, @backstage/plugin-vt-monitor@workspace:plugins/vt-monitor":
+  version: 0.0.0-use.local
+  resolution: "@backstage/plugin-vt-monitor@workspace:plugins/vt-monitor"
+  dependencies:
+    "@backstage/cli": "workspace:^"
+    "@backstage/core-app-api": "workspace:^"
+    "@backstage/core-components": "workspace:^"
+    "@backstage/core-plugin-api": "workspace:^"
+    "@backstage/dev-utils": "workspace:^"
+    "@backstage/test-utils": "workspace:^"
+    "@backstage/theme": "workspace:^"
+    "@material-ui/core": ^4.9.13
+    "@material-ui/icons": ^4.9.1
+    "@material-ui/lab": ^4.0.0-alpha.57
+    "@testing-library/jest-dom": ^5.10.1
+    "@testing-library/react": ^12.1.3
+    "@testing-library/user-event": ^14.0.0
+    "@types/node": "*"
+    cross-fetch: ^3.1.5
+    msw: ^0.49.0
+    react-use: ^17.2.4
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+  languageName: unknown
+  linkType: soft
+
 "@backstage/plugin-xcmetrics@workspace:plugins/xcmetrics":
   version: 0.0.0-use.local
   resolution: "@backstage/plugin-xcmetrics@workspace:plugins/xcmetrics"
@@ -22383,6 +22409,7 @@ __metadata:
     "@backstage/plugin-todo": "workspace:^"
     "@backstage/plugin-user-settings": "workspace:^"
     "@backstage/plugin-vt-deploy": ^0.0.0
+    "@backstage/plugin-vt-monitor": ^0.0.0
     "@backstage/test-utils": "workspace:^"
     "@backstage/theme": "workspace:^"
     "@internal/plugin-catalog-customized": "workspace:^"

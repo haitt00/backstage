@@ -157,6 +157,7 @@ import {
 } from '@backstage/plugin-techdocs-module-addons-contrib';
 import { EntityCostInsightsContent } from '@backstage/plugin-cost-insights';
 import {VtDeployComponent} from "@backstage/plugin-vt-deploy/src/components/ExampleComponent";
+import {VtMonitorComponent} from "@backstage/plugin-vt-monitor/src/components/ExampleComponent";
 
 const customEntityFilterKind = ['Component', 'API', 'System'];
 
@@ -416,7 +417,7 @@ const deployContent = (
 )
 
 const monitorContent = (
-  <VtDeployComponent />
+  <VtMonitorComponent />
 )
 const serviceEntityPage = (
   <EntityLayoutWrapper>

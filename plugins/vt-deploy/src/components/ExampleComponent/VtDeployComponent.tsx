@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import { Typography, Grid } from '@material-ui/core';
+import {Typography, Grid, Chip} from '@material-ui/core';
 import {
   InfoCard,
   Header,
@@ -22,32 +22,158 @@ import {
   Content,
   ContentHeader,
   HeaderLabel,
-  SupportButton,
+  SupportButton, StatusOK, Button, StatusAborted, Table, CodeSnippet,
 } from '@backstage/core-components';
 import { ExampleFetchComponent } from '../ExampleFetchComponent';
+import {discoveryApiRef, useApi} from "@backstage/core-plugin-api";
+import {useEntity} from "@backstage/plugin-catalog-react";
 
-export const VtDeployComponent = () => (
-  <Page themeId="tool">
-    <Header title="Welcome to vt-deploy!" subtitle="Optional subtitle">
-      <HeaderLabel label="Owner" value="Team X" />
-      <HeaderLabel label="Lifecycle" value="Alpha" />
-    </Header>
-    <Content>
-      <ContentHeader title="Plugin title">
-        <SupportButton>A description of your plugin goes here.</SupportButton>
-      </ContentHeader>
-      <Grid container spacing={3} direction="column">
-        <Grid item>
-          <InfoCard title="Information card">
-            <Typography variant="body1">
-              All content should be wrapped in a card like this.
-            </Typography>
-          </InfoCard>
-        </Grid>
-        <Grid item>
-          <ExampleFetchComponent />
-        </Grid>
-      </Grid>
-    </Content>
-  </Page>
-);
+export const VtDeployComponent = () => {
+  const discoverApi = useApi(discoveryApiRef);
+  const proxyBackendBaseUrl = discoverApi.getBaseUrl('awsome-backend');
+
+  const { entity } = useEntity();
+
+
+  const handleClick = async () => {
+
+
+    console.log("Your click worked!!!")
+    console.log(`${proxyBackendBaseUrl}/deploy`)
+    const response = await fetch(`${await proxyBackendBaseUrl}/deploy`);
+    console.log(await response.json())
+    const data = response;
+    return data;
+    //
+    //   if (loading) {
+    //     return <Progress />;
+    //   } else if (error) {
+    //     return <Alert severity="error">{error.message}</Alert>;
+    //   }
+    // }
+  }
+  const columns: TableColumn[] = [
+    {
+      title: 'IP',
+      field: 'ip',
+      highlight: true,
+    },
+    {
+      title: 'Name',
+      field: 'name',
+    },
+    {
+      title: 'Status',
+      field: 'stat',
+    },
+    {
+      title: 'Stage',
+      field: 'stage',
+    },
+  ];
+
+  const columns2: TableColumn[] = [
+    {
+      title: 'STAGE',
+      field: 'stage',
+      highlight: true,
+    },
+    {
+      title: 'Action',
+      field: 'act',
+    },
+  ];
+
+  const text = `# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+version: '3.8'
+services:
+  myapp-postgresql:
+    image: postgres:14.5
+    # volumes:
+    #   - ~/volumes/jhipster/myApp/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=myApp
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - 127.0.0.1:5433:5432 
+`
+  const data: Array<{}> = [];
+  data.push({
+    ip: '127.0.0.1',
+    name: 'docker-desktop',
+    stat: <StatusOK>UP</StatusOK>,
+    stage: <Chip label='test'></Chip>
+  })
+  data.push({
+    ip: '113.190.240.224',
+    name: 'metasohi.com',
+    stat: <StatusOK>UP</StatusOK>
+  })
+
+  const data2: Array<{}> = [];
+  data2.push({
+    stage: <StatusOK>TEST</StatusOK>,
+    act: <Button color='secondary' variant={'contained'}>TEAR DOWN</Button>
+  })
+  data2.push({
+    stage: <StatusAborted>STAGIN</StatusAborted>,
+    act: <Button color='primary' variant={'contained'}>DEPLOY</Button>
+  })
+  data2.push({
+    stage: <StatusAborted>PRODUCTION</StatusAborted>,
+    act: <Button color='primary' variant={'contained'}>DEPLOY</Button>
+  })
+
+
+  const link = {
+    title:'Edit',
+    link:'https://github.com/haitt00/postgres/blob/main/postgresql.yml'
+  }
+
+  return (
+  <Grid container spacing={3}>
+    <Grid item md={4}>
+      <InfoCard title="Overview">
+        {/*    /!*<Typography variant="body1">*!/*/}
+        {/*    /!*  All content should be wrapped in a card like this.*!/*/}
+        {/*    /!*</Typography>*!/*/}
+        {/*    /!*{entity.metadata.name}*!/*/}
+
+        {/*    <Button onClick={handleClick} color="primary" variant="contained">Deploy test</Button>*/}
+        {/*    <Button onClick={handleClick} color="primary" variant="contained">Deploy staging</Button>*/}
+        {/*    <Button onClick={handleClick} color="primary" variant="contained">Deploy production</Button>*/}
+        <Table
+          options={{
+            search: false,
+            paging: false,
+            toolbar: false,
+          }}
+          data={data2}
+          columns={columns2}
+        />
+      </InfoCard>
+
+    </Grid>
+    <Grid item md={8} xs={4}>
+      <InfoCard title="Compose file" deepLink={link}>
+        <CodeSnippet text={text} showLineNumbers showCopyCodeButton language={'javascript'}></CodeSnippet>
+      </InfoCard>
+    </Grid>
+    <Grid item md={12}>
+      <Table
+        options={{paging:true}}
+        columns={columns}
+        title="Your Docker Engines"
+        data={data}
+
+      ></Table>
+    </Grid>
+    {/*<Grid item>*/}
+    {/*  <ExampleFetchComponent />*/}
+    {/*</Grid>*/}
+
+  </Grid>
+)};

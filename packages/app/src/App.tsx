@@ -108,6 +108,7 @@ import { PlaylistIndexPage } from '@backstage/plugin-playlist';
 import { TwoColumnLayout } from './components/scaffolder/customScaffolderLayouts';
 import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
 import { VtDeployPage } from '@backstage/plugin-vt-deploy';
+import { VtMonitorPage } from '@backstage/plugin-vt-monitor';
 
 const app = createApp({
   apis,
@@ -281,6 +282,7 @@ const routes = (
     <Route path="/playlist" element={<PlaylistIndexPage />} />
     <Route path="/score-board" element={<ScoreBoardPage />} />
     <Route path="/vt-deploy" element={<VtDeployPage />} />
+    <Route path="/vt-monitor" element={<VtMonitorPage />} />
   </FlatRoutes>
 );
 

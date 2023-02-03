@@ -1,5 +1,5 @@
 app:
-  title: Backstage Example App
+  title: VStage
   baseUrl: http://localhost:3000
   #datadogRum:
   #  clientToken: '123456789'
@@ -255,8 +255,8 @@ catalog:
     # backend, for example packages/backend/.
 
     # Backstage example entities
-    - type: file
-      target: ../catalog-model/examples/all.yaml
+#    - type: file
+#      target: ../catalog-model/examples/all.yaml
     # Backstage example groups and users
     - type: file
       target: ../catalog-model/examples/acme-corp.yaml
@@ -281,9 +281,26 @@ catalog:
       rules:
         - allow: [ Template ]
     - type: file
+      target: ../../packages/backend/src/plugins/scaffolder/templates/elasticsearch/templateElasticsearch.yaml
+      rules:
+        - allow: [ Template ]
+    - type: file
+      target: ../../packages/backend/src/plugins/scaffolder/templates/kafka/templateKafka.yaml
+      rules:
+        - allow: [ Template ]
+    - type: file
+      target: ../../packages/backend/src/plugins/scaffolder/templates/keycloak/templateKeycloak.yaml
+      rules:
+        - allow: [ Template ]
+    - type: file
       target: ../../packages/backend/src/plugins/scaffolder/templates/postgresql/templatePostgresql.yaml
       rules:
         - allow: [ Template ]
+    - type: file
+      target: ../../packages/backend/src/plugins/scaffolder/templates/redis/templateRedis.yaml
+      rules:
+        - allow: [ Template ]
+
 scaffolder:
   # Use to customize default commit author info used when new components are created
   # defaultAuthor:
