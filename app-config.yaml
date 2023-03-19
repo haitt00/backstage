@@ -258,10 +258,14 @@ catalog:
 #    - type: file
 #      target: ../catalog-model/examples/all.yaml
     # Backstage example groups and users
-    - type: file
-      target: ../catalog-model/examples/acme-corp.yaml
+#    - type: file
+#      target: ../catalog-model/examples/acme-corp.yaml
+#      rules:
+#        - allow: [User, Group]
+    - type: github-org
+      target: https://github.com/vstage-team
       rules:
-        - allow: [User, Group]
+        - allow: [ Group, User ]
     # Example component for github-actions and TechDocs
     - type: file
       target: ../../plugins/github-actions/examples/sample.yaml

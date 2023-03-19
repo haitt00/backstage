@@ -38,10 +38,17 @@ class ExamplePermissionPolicy implements PermissionPolicy {
     request: PolicyQuery,
     user?: BackstageIdentityResponse,
   ): Promise<PolicyDecision> {
-    if (isPlaylistPermission(request.permission)) {
-      return this.playlistPermissionPolicy.handle(request, user);
-    }
+    // if (isPlaylistPermission(request.permission)) {
+    //   return this.playlistPermissionPolicy.handle(request, user);
+    // }
 
+    console.log("permission ", JSON.stringify(request.permission));
+
+    if(request.permission.name === 'catalog.entity.delete'){
+      return {
+        result: AuthorizeResult.DENY,
+      };
+    }
     return {
       result: AuthorizeResult.ALLOW,
     };

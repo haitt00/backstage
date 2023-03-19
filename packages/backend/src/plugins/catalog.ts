@@ -19,13 +19,16 @@ import { EntityProvider } from '@backstage/plugin-catalog-node';
 import { ScaffolderEntitiesProcessor } from '@backstage/plugin-scaffolder-backend';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
-
+import { GithubOrgReaderProcessor } from '@backstage/plugin-catalog-backend-module-github';
 export default async function createPlugin(
   env: PluginEnvironment,
   providers?: Array<EntityProvider>,
 ): Promise<Router> {
   const builder = await CatalogBuilder.create(env);
   builder.addProcessor(new ScaffolderEntitiesProcessor());
+  builder.addProcessor(
+    GithubOrgReaderProcessor.fromConfig(env.config, { logger: env.logger }),
+  );
   builder.addEntityProvider(providers ?? []);
   const { processingEngine, router } = await builder.build();
   await processingEngine.start();

@@ -158,7 +158,7 @@ export async function getOrganizationUsers(
     userTransformer,
     {
       org,
-      email: tokenType === 'token',
+      email: true,
     },
   );
 

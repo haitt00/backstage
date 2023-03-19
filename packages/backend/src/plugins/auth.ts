@@ -44,27 +44,34 @@ export default async function createPlugin(
       //       It is here for demo purposes only.
       github: providers.github.create({
         signIn: {
-          async resolver({ result: { fullProfile } }, ctx) {
-            const userId = fullProfile.username;
-            if (!userId) {
-              throw new Error(
-                `GitHub user profile does not contain a username`,
-              );
-            }
-
-            const userEntityRef = stringifyEntityRef({
-              kind: 'User',
-              name: userId,
-              namespace: DEFAULT_NAMESPACE,
-            });
-
-            return ctx.issueToken({
-              claims: {
-                sub: userEntityRef,
-                ent: [userEntityRef],
-              },
-            });
-          },
+          // async resolver({ result: { fullProfile } }, ctx) {
+          //   const userId = fullProfile.username;
+          //   if (!userId) {
+          //     throw new Error(
+          //       `GitHub user profile does not contain a username`,
+          //     );
+          //   }
+          //
+          //   const userEntityRef = stringifyEntityRef({
+          //     kind: 'User',
+          //     name: userId,
+          //     namespace: DEFAULT_NAMESPACE,
+          //   });
+          //
+          //   return ctx.issueToken({
+          //     claims: {
+          //       sub: userEntityRef,
+          //       ent: [userEntityRef],
+          //     },
+          //   });
+          //   // return ctx.signInWithCatalogUser({
+          //   //   entityRef: {
+          //   //     name: fullProfile.id,
+          //   //   },
+          //   // });
+          // },
+          resolver:
+            providers.github.resolvers.usernameMatchingUserEntityName(),
         },
       }),
       gitlab: providers.gitlab.create({
@@ -76,6 +83,7 @@ export default async function createPlugin(
               },
             });
           },
+
         },
       }),
       microsoft: providers.microsoft.create({

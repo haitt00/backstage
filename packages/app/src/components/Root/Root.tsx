@@ -150,21 +150,21 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         />
         {/*<SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />*/}
         {/*<SidebarItem icon={LibraryBooks} to="docs" text="Docs" />*/}
-        {/*<SidebarItem icon={PlaylistPlayIcon} to="playlist" text="Playlists" />*/}
-        {/*<SidebarItem icon={LayersIcon} to="explore" text="Explore" />*/}
+        <SidebarItem icon={PlaylistPlayIcon} to="playlist" text="Playlists" />
+        <SidebarItem icon={LayersIcon} to="explore" text="Explore" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
         {/* End global nav */}
         <SidebarDivider />
         {/*<SidebarScrollWrapper>*/}
         {/*  <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />*/}
-        {/*  <SidebarItem icon={RuleIcon} to="lighthouse" text="Lighthouse" />*/}
+          <SidebarItem icon={RuleIcon} to="lighthouse" text="Lighthouse" />
         {/*  <SidebarItem*/}
         {/*    icon={MoneyIcon}*/}
         {/*    to="cost-insights"*/}
         {/*    text="Cost Insights"*/}
         {/*  />*/}
-        {/*  <SidebarItem icon={GraphiQLIcon} to="graphiql" text="GraphiQL" />*/}
-        {/*  <SidebarItem icon={Score} to="score-board" text="Score board" />*/}
+          <SidebarItem icon={GraphiQLIcon} to="graphiql" text="GraphiQL" />
+          <SidebarItem icon={Score} to="score-board" text="Score board" />
         {/*</SidebarScrollWrapper>*/}
         {/*<SidebarDivider />*/}
         {/*<Shortcuts />*/}

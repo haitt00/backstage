@@ -22,7 +22,7 @@ import {
   Content,
   ContentHeader,
   HeaderLabel,
-  SupportButton, StatusOK, Button, StatusAborted, Table, CodeSnippet,
+  SupportButton, StatusOK, Button, StatusAborted, Table, CodeSnippet, Select,
 } from '@backstage/core-components';
 import { ExampleFetchComponent } from '../ExampleFetchComponent';
 import {discoveryApiRef, useApi} from "@backstage/core-plugin-api";
@@ -79,6 +79,10 @@ export const VtDeployComponent = () => {
       highlight: true,
     },
     {
+      title: 'Version',
+      field: 'ver',
+    },
+    {
       title: 'Action',
       field: 'act',
     },
@@ -110,21 +114,59 @@ services:
   data.push({
     ip: '113.190.240.224',
     name: 'metasohi.com',
-    stat: <StatusOK>UP</StatusOK>
+    stat: <StatusOK>UP</StatusOK>,
+    stage: <Chip label='production'></Chip>
+
   })
 
+  const SELECT_ITEMS = [
+    {
+      label: '50ab337',
+      value: 'test_1',
+    },
+    {
+      label: '557e9d8',
+      value: 'test_2',
+    },
+  ]
   const data2: Array<{}> = [];
   data2.push({
     stage: <StatusOK>TEST</StatusOK>,
-    act: <Button color='secondary' variant={'contained'}>TEAR DOWN</Button>
+    ver: '50ab337',
+    act:<><Select
+    onChange={() => {}}
+    placeholder="Pick a version"
+    // label="Default"
+    items={SELECT_ITEMS}
+  />
+      <Button color='primary' variant={'contained'}>DEPLOY</Button>
+    </>
+
+
   })
   data2.push({
-    stage: <StatusAborted>STAGIN</StatusAborted>,
-    act: <Button color='primary' variant={'contained'}>DEPLOY</Button>
+    stage: <StatusAborted>STAGING</StatusAborted>,
+    // ver: '557e9d8',
+    act: <><Select
+      onChange={() => {}}
+      placeholder="Pick a version"
+      // label="Default"
+      items={SELECT_ITEMS}
+    />
+      <Button color='primary' variant={'contained'}>DEPLOY</Button>
+    </>
   })
   data2.push({
     stage: <StatusAborted>PRODUCTION</StatusAborted>,
-    act: <Button color='primary' variant={'contained'}>DEPLOY</Button>
+    ver: '557e9d8',
+    act: <><Select
+      onChange={() => {}}
+      placeholder="Pick a version"
+      // label="Default"
+      items={SELECT_ITEMS}
+    />
+      <Button color='primary' variant={'contained'}>DEPLOY</Button>
+    </>
   })
 
 
@@ -135,7 +177,7 @@ services:
 
   return (
   <Grid container spacing={3}>
-    <Grid item md={4}>
+    <Grid item md={6}>
       <InfoCard title="Overview">
         {/*    /!*<Typography variant="body1">*!/*/}
         {/*    /!*  All content should be wrapped in a card like this.*!/*/}
@@ -157,7 +199,7 @@ services:
       </InfoCard>
 
     </Grid>
-    <Grid item md={8} xs={4}>
+    <Grid item md={6} xs={4}>
       <InfoCard title="Compose file" deepLink={link}>
         <CodeSnippet text={text} showLineNumbers showCopyCodeButton language={'javascript'}></CodeSnippet>
       </InfoCard>

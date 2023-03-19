@@ -77,19 +77,19 @@ export const VtMonitorComponent = () => {
   ];
   const data: Array<{}> = [];
   data.push({
-    ip: <Link to={'https://my-deployment-8b878b.apm.us-central1.gcp.cloud.es.io'}>Open</Link>,
+    ip: <Link to={'https://my-deployment-8b878b.apm.us-central1.gcp.cloud.es.io'}>Open Kibana</Link>,
     name: 'My deployment',
     stat: <StatusOK>UP</StatusOK>,
     ver: '8.6.1',
     stage: 'test'
 
   })
-  data.push({
-    ip: <Link to={'113.190.240.224'}>Open</Link>,
-    name: 'metasohi',
-    stat: <StatusOK>UP</StatusOK>,
-    ver: '8.6.1'
-  })
+  // data.push({
+  //   ip: <Link to={'113.190.240.224'}>Open</Link>,
+  //   name: 'metasohi',
+  //   stat: <StatusOK>UP</StatusOK>,
+  //   ver: '8.6.1'
+  // })
 
 
 
@@ -134,10 +134,11 @@ export const VtMonitorComponent = () => {
   <Grid container spacing={3}>
 
     <Grid item md={4}>
-      <InfoCard title={'Errors'}>
+      <InfoCard title={'Latency'}>
         <StatusAborted>
-          0
+          785.19 ms
         </StatusAborted>
+        {/*<Gauge*/}
         {/*<div style={containerStyle}>*/}
         {/*  <TrendLine data={[0.379, 0.331, 235, 245, 206, 278, 282]} title='abc'></TrendLine>*/}
         {/*</div>*/}
@@ -145,9 +146,9 @@ export const VtMonitorComponent = () => {
     </Grid>
 
     <Grid item md={4}>
-      <InfoCard title={'Slow requests'}>
+      <InfoCard title={'Throughput'}>
         <StatusPending>
-          319
+          30 TPS
         </StatusPending>
         {/*<div style={containerStyle}>*/}
         {/*  <TrendLine data={[0.379, 0.331, 235, 245, 206, 278, 282]} title='abc'></TrendLine>*/}
@@ -156,9 +157,9 @@ export const VtMonitorComponent = () => {
     </Grid>
 
     <Grid item md={4}>
-      <InfoCard title={'Unique users'}>
+      <InfoCard title={'Error rate'}>
         <StatusOK>
-          2
+          0 %
         </StatusOK>
         {/*<div style={containerStyle}>*/}
         {/*  <TrendLine data={[0.379, 0.331, 235, 245, 206, 278, 282]} title='abc'></TrendLine>*/}

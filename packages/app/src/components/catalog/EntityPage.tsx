@@ -425,101 +425,107 @@ const serviceEntityPage = (
       {overviewContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/ci-cd" title="CI/CD">
-      {cicdContent}
+    <EntityLayout.Route path="/deploy" title="Deployment">
+      {deployContent}
     </EntityLayout.Route>
+    <EntityLayout.Route path="/monitor" title="Monitor">
+      {monitorContent}
+    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/ci-cd" title="CI/CD">*/}
+    {/*  {cicdContent}*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/errors" title="Errors">
-      {errorsContent}
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/errors" title="Errors">*/}
+    {/*  {errorsContent}*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/api" title="API">
-      <Grid container spacing={3} alignItems="stretch">
-        <Grid item xs={12} md={6}>
-          <EntityProvidedApisCard />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <EntityConsumedApisCard />
-        </Grid>
-      </Grid>
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/api" title="API">*/}
+    {/*  <Grid container spacing={3} alignItems="stretch">*/}
+    {/*    <Grid item xs={12} md={6}>*/}
+    {/*      <EntityProvidedApisCard />*/}
+    {/*    </Grid>*/}
+    {/*    <Grid item xs={12} md={6}>*/}
+    {/*      <EntityConsumedApisCard />*/}
+    {/*    </Grid>*/}
+    {/*  </Grid>*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/dependencies" title="Dependencies">
-      <Grid container spacing={3} alignItems="stretch">
-        <Grid item xs={12} md={6}>
-          <EntityDependsOnComponentsCard variant="gridItem" />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <EntityDependsOnResourcesCard variant="gridItem" />
-        </Grid>
-      </Grid>
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/dependencies" title="Dependencies">*/}
+    {/*  <Grid container spacing={3} alignItems="stretch">*/}
+    {/*    <Grid item xs={12} md={6}>*/}
+    {/*      <EntityDependsOnComponentsCard variant="gridItem" />*/}
+    {/*    </Grid>*/}
+    {/*    <Grid item xs={12} md={6}>*/}
+    {/*      <EntityDependsOnResourcesCard variant="gridItem" />*/}
+    {/*    </Grid>*/}
+    {/*  </Grid>*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/docs" title="Docs">
-      {techdocsContent}
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/docs" title="Docs">*/}
+    {/*  {techdocsContent}*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route
-      if={isNewRelicDashboardAvailable}
-      path="/newrelic-dashboard"
-      title="New Relic Dashboard"
-    >
-      <EntityNewRelicDashboardContent />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route*/}
+    {/*  if={isNewRelicDashboardAvailable}*/}
+    {/*  path="/newrelic-dashboard"*/}
+    {/*  title="New Relic Dashboard"*/}
+    {/*>*/}
+    {/*  <EntityNewRelicDashboardContent />*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/kubernetes" title="Kubernetes">*/}
+    {/*  <EntityKubernetesContent />*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
-      {pullRequestsContent}
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/pull-requests" title="Pull Requests">*/}
+    {/*  {pullRequestsContent}*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/code-insights" title="Code Insights">
-      <EntityGithubInsightsContent />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/code-insights" title="Code Insights">*/}
+    {/*  <EntityGithubInsightsContent />*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/tech-insights" title="Scorecards">
-      <Grid container spacing={3} alignItems="stretch">
-        <Grid item xs={12} md={6}>
-          <EntityTechInsightsScorecardCard
-            title="Scorecard 1"
-            description="This is a sample scorecard no. 1"
-            checksId={['titleCheck']}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <EntityTechInsightsScorecardCard
-            title="Scorecard 2"
-            checksId={['techDocsCheck']}
-          />
-        </Grid>
-      </Grid>
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/tech-insights" title="Scorecards">*/}
+    {/*  <Grid container spacing={3} alignItems="stretch">*/}
+    {/*    <Grid item xs={12} md={6}>*/}
+    {/*      <EntityTechInsightsScorecardCard*/}
+    {/*        title="Scorecard 1"*/}
+    {/*        description="This is a sample scorecard no. 1"*/}
+    {/*        checksId={['titleCheck']}*/}
+    {/*      />*/}
+    {/*    </Grid>*/}
+    {/*    <Grid item xs={12} md={6}>*/}
+    {/*      <EntityTechInsightsScorecardCard*/}
+    {/*        title="Scorecard 2"*/}
+    {/*        checksId={['techDocsCheck']}*/}
+    {/*      />*/}
+    {/*    </Grid>*/}
+    {/*  </Grid>*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/code-coverage" title="Code Coverage">
-      <EntityCodeCoverageContent />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/code-coverage" title="Code Coverage">*/}
+    {/*  <EntityCodeCoverageContent />*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/kafka" title="Kafka">
-      <EntityKafkaContent />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/kafka" title="Kafka">*/}
+    {/*  <EntityKafkaContent />*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/todos" title="TODOs">
-      <EntityTodoContent />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/todos" title="TODOs">*/}
+    {/*  <EntityTodoContent />*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route path="/costs" title="Costs">
-      <EntityCostInsightsContent />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route path="/costs" title="Costs">*/}
+    {/*  <EntityCostInsightsContent />*/}
+    {/*</EntityLayout.Route>*/}
 
-    <EntityLayout.Route
-      path="/dynatrace"
-      title="Dynatrace"
-      if={isDynatraceAvailable}
-    >
-      <DynatraceTab />
-    </EntityLayout.Route>
+    {/*<EntityLayout.Route*/}
+    {/*  path="/dynatrace"*/}
+    {/*  title="Dynatrace"*/}
+    {/*  if={isDynatraceAvailable}*/}
+    {/*>*/}
+    {/*  <DynatraceTab />*/}
+    {/*</EntityLayout.Route>*/}
   </EntityLayoutWrapper>
 );
 

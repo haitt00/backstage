@@ -53,8 +53,16 @@ spec:
           type: string
           ui:field: RepoUrlPicker
           ui:options:
+#            requestUserCredentials:
+#              secretsKey: USER_OAUTH_TOKEN
+#              additionalScopes:
+#                github:
+#                  - workflow
             allowedHosts:
               - github.com
+#            allowedOwners:
+#              - vstage-team
+#              -
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
@@ -66,6 +74,7 @@ spec:
       input:
         url: ./content
         values:
+          owner: ${{ user.entity.metadata.name }}
           baseName: ${{ parameters.baseName }}
           postgresUser: ${{ parameters.postgresUser }}
           postgresPassword: ${{ parameters.postgresPassword }}
@@ -79,6 +88,9 @@ spec:
         allowedHosts: ['github.com']
         description: This is ${{ parameters.baseName }}
         repoUrl: ${{ parameters.repoUrl }}
+#        token: ${{ secrets.USER_OAUTH_TOKEN }}
+        gitAuthorName: ${{ user.entity.metadata.name }}
+        gitAuthorEmail: ${{ user.entity.spec.profile.email }}
 
     # The final step is to register our new component in the catalog.
     - id: register

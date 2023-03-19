@@ -4,5 +4,5 @@ metadata:
   name: ${{ values.baseName | dump }}
 spec:
   type: database
-  owner: user:guest
+  owner: user:${{ values.owner }}
   lifecycle: experimental
